@@ -4,8 +4,7 @@ import org.springframework.http.HttpStatus;
 
 import java.io.Serializable;
 
-public class HttpResponse implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class HttpResponse {
 
     private int httpStatusCode; // 200, 404, 500
     private HttpStatus httpStatus; // enum with statuses
