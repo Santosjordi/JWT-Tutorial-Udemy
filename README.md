@@ -1,7 +1,7 @@
 # JSON Web Token Tutorial
 Availiable at [Udemy](https://www.udemy.com/course/jwt-springsecurity-angular)
 
-## Learning Material for
+## Learning Project for
 - JSON Web Token (JWT)
 - Authentication
 - Authorization
