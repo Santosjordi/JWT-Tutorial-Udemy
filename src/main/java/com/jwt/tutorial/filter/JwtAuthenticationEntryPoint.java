@@ -18,7 +18,7 @@ import java.io.OutputStream;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Component
-public class JWTAuthenticationEntryPoint extends Http403ForbiddenEntryPoint {
+public class JwtAuthenticationEntryPoint extends Http403ForbiddenEntryPoint {
 
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException {
