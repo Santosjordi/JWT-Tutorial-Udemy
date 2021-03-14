@@ -2,8 +2,10 @@ package com.jwt.tutorial.service.implementation;
 
 import com.jwt.tutorial.domain.User;
 import com.jwt.tutorial.domain.UserPrincipal;
+import com.jwt.tutorial.exception.domain.UserNotFoundException;
 import com.jwt.tutorial.repository.UserRepository;
 import com.jwt.tutorial.service.UserService;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.Date;
+import java.util.List;
 
 @Service
 @Transactional
@@ -43,5 +46,35 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
             LOGGER.info("Returning found user by username: " + username.toString());
             return userPrincipal;
         }
+    }
+
+    @Override
+    public UserService register(String firstName, String lastName, String username, String email) {
+        validateNewUsernameAndEmail();
+        return null;
+    }
+
+    private void validateNewUsernameAndEmail(String currentUsername, String newUsername, String email) throws UserNotFoundException {
+        if (StringUtils.isNotBlank(currentUsername)){
+            User currentUser = findByUsername(currentUsername);
+            if (currentUser == null){
+                throw new UserNotFoundException("No user found with the username: " + currentUsername);
+            }
+        }
+    }
+
+    @Override
+    public List<User> getUsers() {
+        return null;
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        return null;
+    }
+
+    @Override
+    public User findUserByEmail(String email) {
+        return null;
     }
 }
