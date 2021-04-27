@@ -16,7 +16,7 @@ public class AuthenticationFailureListener {
     }
 
     @EventListener
-    public void onAuthenticationFailure(AuthenticationFailureBadCredentialsEvent event){
+    public void onAuthenticationFailure(AuthenticationFailureBadCredentialsEvent event) {
         Object principal = event.getAuthentication().getPrincipal();
         if (principal instanceof String){
             String username = (String) event.getAuthentication().getPrincipal();
