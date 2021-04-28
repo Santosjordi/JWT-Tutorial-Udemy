@@ -6,8 +6,6 @@ import java.util.Date;
 
 @Entity
 public class User implements Serializable {
-    private static final long serialVersionUID = 1L;
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false, updatable = false)
@@ -22,12 +20,17 @@ public class User implements Serializable {
     private Date lastLoginDate;
     private Date lastLoginDateDisplay;
     private Date joinDate;
-    private String role; //ROLE_USER{ read, delete }, ROLE_ADMIN{ delete }
+    private String role; //ROLE_USER{ read, edit }, ROLE_ADMIN {delete}
     private String[] authorities;
     private boolean isActive;
     private boolean isNotLocked;
 
-    public User(Long id, String userId, String firstName, String lastName, String username, String password, String email, String profileImageUrl, Date lastLoginDate, Date lastLoginDateDisplay, Date joinDate, String role, String[] authorities, boolean isActive, boolean isNotLocked) {
+    public User(){}
+
+    public User(Long id, String userId, String firstName, String lastName,
+                String username, String password, String email, String profileImageUrl,
+                Date lastLoginDate, Date lastLoginDateDisplay, Date joinDate,
+                String role, String[] authorities, boolean isActive, boolean isNotLocked) {
         this.id = id;
         this.userId = userId;
         this.firstName = firstName;
@@ -44,8 +47,6 @@ public class User implements Serializable {
         this.isActive = isActive;
         this.isNotLocked = isNotLocked;
     }
-
-    public User(){}
 
     public Long getId() {
         return id;
@@ -83,8 +84,8 @@ public class User implements Serializable {
         return username;
     }
 
-    public void setUsername(String userName) {
-        this.username = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -135,11 +136,11 @@ public class User implements Serializable {
         this.joinDate = joinDate;
     }
 
-    public String getRoles() {
+    public String getRole() {
         return role;
     }
 
-    public void setRoles(String roles) {
+    public void setRole(String role) {
         this.role = role;
     }
 
@@ -166,5 +167,4 @@ public class User implements Serializable {
     public void setNotLocked(boolean notLocked) {
         isNotLocked = notLocked;
     }
-
 }

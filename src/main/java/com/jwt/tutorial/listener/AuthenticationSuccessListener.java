@@ -1,6 +1,5 @@
 package com.jwt.tutorial.listener;
 
-import com.jwt.tutorial.domain.User;
 import com.jwt.tutorial.domain.UserPrincipal;
 import com.jwt.tutorial.service.LoginAttemptService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,4 +25,4 @@ public class AuthenticationSuccessListener {
         }
     }
 }
-// username: BuckRogers password: $2a$10$38w6VfwYIvNMQtXJgnVq.uUDhcpKaieC6VUKChT8R9rLHcECWBc0S
+// username: daniels password: tMYaMYZELe

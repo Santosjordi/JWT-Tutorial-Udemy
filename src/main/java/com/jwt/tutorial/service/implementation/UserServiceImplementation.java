@@ -59,7 +59,7 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
             user.setLastLoginDate(new Date());
             userRepository.save(user);
             UserPrincipal userPrincipal = new UserPrincipal(user);
-            LOGGER.info(NO_USER_FOUND_BY_USERNAME + username.toString());
+            LOGGER.info(FOUND_USER_BY_USERNAME + username.toString());
             return userPrincipal;
         }
     }
@@ -91,7 +91,7 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
         user.setPassword(encodedPassword);
         user.setActive(true);
         user.setNotLocked(true);
-        user.setRoles(ROLE_USER.name());
+        user.setRole(ROLE_USER.name());
         user.setAuthorities(ROLE_USER.getAuthorities());
         user.setProfileImageUrl(getTemporaryProfileImageUrl());
         userRepository.save(user);
