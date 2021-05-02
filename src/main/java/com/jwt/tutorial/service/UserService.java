@@ -7,6 +7,7 @@ import com.jwt.tutorial.exception.domain.UsernameExistException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -20,15 +21,15 @@ public interface UserService {
 
     User findUserByEmail(String email);
 
-    User addNewUser(String firstname, String lastname, String username, String email, String role,
-                    boolean isNonLocked, boolean isActive, MultipartFile profileImage);
+    User addNewUser(String firstName, String lastName, String username, String email, String role,
+                    boolean isNonLocked, boolean isActive, MultipartFile profileImage) throws UserNotFoundException, EmailExistException, UsernameExistException, IOException;
 
-    User updateUser(String currentUsername, String newFirstname, String newLastname, String newUsername, String newEmail, String role,
-                    boolean isNonLocked, boolean isActive, MultipartFile profileImage);
+    User updateUser(String currentUsername, String newFirstName, String newLastName, String newUsername, String newEmail, String role,
+                    boolean isNonLocked, boolean isActive, MultipartFile profileImage) throws UserNotFoundException, EmailExistException, UsernameExistException, IOException;
 
     void deleteUser(long id);
 
-    void resetPassword(String email);
+    void resetPassword(String email) throws UserNotFoundException;
 
-    User updateProfileImage(String username, MultipartFile  profileImage);
+    User updateProfileImage(String username, MultipartFile  profileImage) throws UserNotFoundException, EmailExistException, UsernameExistException, IOException;
 }
