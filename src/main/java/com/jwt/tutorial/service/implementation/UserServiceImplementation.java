@@ -6,6 +6,7 @@ import com.jwt.tutorial.exception.domain.EmailExistException;
 import com.jwt.tutorial.exception.domain.UserNotFoundException;
 import com.jwt.tutorial.exception.domain.UsernameExistException;
 import com.jwt.tutorial.repository.UserRepository;
+import com.jwt.tutorial.service.EmailService;
 import com.jwt.tutorial.service.LoginAttemptService;
 import com.jwt.tutorial.service.UserService;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -19,6 +20,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.transaction.Transactional;
@@ -39,12 +41,14 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
     private BCryptPasswordEncoder passwordEncoder;
 
     private LoginAttemptService loginAttemptService;
+    private EmailService emailService;
 
     @Autowired
-    public UserServiceImplementation(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder, LoginAttemptService loginAttemptService) {
+    public UserServiceImplementation(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder, LoginAttemptService loginAttemptService, EmailService emailService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.loginAttemptService = loginAttemptService;
+        this.emailService = emailService;
     }
 
     @Override
@@ -96,6 +100,7 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
         user.setProfileImageUrl(getTemporaryProfileImageUrl());
         userRepository.save(user);
         LOGGER.info("New user password: " + password);
+        emailService.sendNewPasswordEmail(firstName, password, email);
         return user;
     }
 
@@ -156,5 +161,30 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
     @Override
     public User findUserByEmail(String email) {
         return userRepository.findUserByEmail(email);
+    }
+
+    @Override
+    public User addNewUser(String firstname, String lastname, String username, String email, String role, boolean isNonLocked, boolean isActive, MultipartFile profileImage) {
+        return null;
+    }
+
+    @Override
+    public User updateUser(String currentUsername, String newFirstname, String newLastname, String newUsername, String newEmail, String role, boolean isNonLocked, boolean isActive, MultipartFile profileImage) {
+        return null;
+    }
+
+    @Override
+    public void deleteUser(long id) {
+
+    }
+
+    @Override
+    public void resetPassword(String email) {
+
+    }
+
+    @Override
+    public User updateProfileImage(String username, MultipartFile profileImage) {
+        return null;
     }
 }
